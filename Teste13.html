@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista-de-Tarefas</title>
+    <style>
+        body {
+            font: normal 17pt Arial;
+            background-color: rgba(0, 0, 0, 0.925);
+            color: aliceblue;
+        }
+        #cabeçario {
+            text-align: center;
+            font-size: 25pt;
+            margin-top: 25px;
+        }
+        #section {
+            padding: 15px;
+            width: 500px;
+            margin: auto;
+        }
+        #div2 {
+            margin-top: 75px;
+            color: aliceblue;
+        }
+        #div1 {
+            text-align: center;
+            margin-top: 45px;
+        }
+        #barratxt {
+            background-color: rgba(102, 99, 99, 0.733);
+            border: none;
+            width: 340px;
+            height: 45px;
+            border-radius: 20px;
+            color: aliceblue;
+            font-size: 17pt;
+        }
+        #barratxt::placeholder {
+            color: rgb(179, 179, 179);
+            padding-left: 8px;
+        }
+        #botao {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            font-size: 22pt;
+            border: none;
+            cursor: pointer;
+            background-color: rgb(3, 179, 3);
+        }
+        #botao:hover {
+            background-color: green;
+        }
+        #feito {
+            height: 45px;
+            width: 45px;
+            border-radius: 50%;
+            font-size: 22pt;
+            border: none;
+            cursor: pointer;
+            background-color: rgb(3, 179, 3)
+        }
+        #feito:hover {
+            background-color: green;
+        }
+        #ambos {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px;
+        }
+        #ambos:hover {
+            background-color: rgba(102, 99, 99, 0.733);
+            border-radius: 25px;
+            padding: 15px;
+        }
+        #delbot {
+            height: 45px;
+            width: 45px;
+            border-radius: 50%;
+            font-size: 16pt;
+            border: none;
+            cursor: pointer;
+            background-color: red;
+        }
+        #delbot:hover {
+            background-color: darkred;
+        }
+    </style>
+</head>
+<body>
+    <header id="cabeçario">LISTA DE TAREFAS</header>
+    <section id="section">
+        <div id="div1">
+            <input type="text" name="" id="barratxt" placeholder="Digite uma tarefa"> <input type="button" value="+" id="botao" onclick="adicionar()">
+        </div>
+        <div id="div2"> 
+        </div>
+    </section>
+    <script>
+function adicionar() {
+    let texto = document.getElementById('barratxt')
+
+    if (texto.value.length == 0) {
+    alert('Adicione uma tarefa na barra.')
+} else {
+    let tarefas = document.getElementById('div2')
+
+    let ambos = document.createElement('div')
+    ambos.id= 'ambos'
+
+    let lista = document.createElement('span') 
+    lista.textContent = texto.value
+
+    let feito = document.createElement('button')
+    feito.id = 'feito'
+    feito.innerHTML = '✓'
+
+    ambos.appendChild(lista)
+    ambos.appendChild(feito)
+
+    tarefas.appendChild(ambos)
+
+    feito.onclick = function tirar() {
+        lista.style.textDecoration = 'line-through'
+        feito.remove();
+        let delbot = document.createElement('button')
+        delbot.id= 'delbot'
+        delbot.innerHTML = '🗑️'
+        ambos.appendChild(delbot)
+        delbot.onclick = function deletar() {
+            lista.remove()
+            delbot.remove()
+            ambos.remove()
+        }
+    }
+    
+    texto.value = ''   
+}
+}
+    </script>
+</body>
+</html>
